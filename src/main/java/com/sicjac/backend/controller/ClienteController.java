@@ -8,41 +8,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/clientes")
 @CrossOrigin(origins = "*")
 public class ClienteController {
 
-    private final ClienteService usuarioService;
+    private final ClienteService clienteService;
 
     public ClienteController(ClienteService clienteService) {
-        this.usuarioService = clienteService;
+        this.clienteService = clienteService;
     }
 
     @GetMapping
     public List<Cliente> listarTodos() {
-        return usuarioService.listarTodos();
+        return clienteService.listarTodos();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id) {
-        return usuarioService.buscarPorId(id)
+        return clienteService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public Cliente guardar(@RequestBody Cliente cliente) {
-        return usuarioService.guardar(cliente);
+        return clienteService.guardar(cliente);
     }
 
     @PutMapping("/{id}")
     public Cliente actualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
-        return usuarioService.actualizar(id, cliente);
+        return clienteService.actualizar(id, cliente);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
-        usuarioService.eliminar(id);
+        clienteService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
 }
